@@ -20,3 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+
+    //Funcoes
+    Route::get('/funcoes', 'FuncaoController@index')->name('funcoes');
+    Route::get('/funcoes/nova', 'FuncaoController@create')->name('nova_funcao');
+    Route::post('/funcoes/store', 'FuncaoController@store')->name('cadastrar_funcao');
+    Route::get('/funcoes/editar/{id}', 'FuncaoController@edit')->name('editar_funcao');    
+    Route::put('/funcoes/update/{id}', 'FuncaoController@update')->name('update_funcao');
+    Route::get('/funcoes/excluir/{id}', 'FuncaoController@destroy')->name('excluir_funcao');
+});
